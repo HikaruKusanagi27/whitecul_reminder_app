@@ -37,25 +37,31 @@ dependencies:
   pedantic_mono: ^1.29.0
   
   # カレンダー機能
-  table_calendar: ^3.1.0
+  table_calendar: ^3.1.2
   
   # データ保存
   freezed_annotation: ^2.4.4
   
   # 音声合成（Text-to-Speech）
-  flutter_tts: ^4.0.2
+  flutter_tts: ^4.2.0
+  
+  # 音声ファイル再生
+  audioplayers: ^6.1.0
   
   # HTTP通信（VOICEVOX API用）
-  http: ^1.2.1
+  http: ^1.2.2
   
   # JSON処理
   json_annotation: ^4.9.0
   
   # 通知機能
-  flutter_local_notifications: ^17.0.0
+  flutter_local_notifications: ^17.2.4
   
   # 時間処理
   intl: ^0.20.2
+  
+  # タイムゾーン処理
+  timezone: ^0.9.4
   
   # 状態管理（Riverpod）
   flutter_riverpod: ^2.6.1
@@ -67,6 +73,8 @@ dependencies:
   # 国際化
   flutter_localizations:
     sdk: flutter
+  path: ^1.9.1
+  
 
 dev_dependencies:
   flutter_test:
@@ -79,6 +87,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
   build_runner: 2.4.13
+  json_serializable: ^6.7.1
   freezed: ^2.5.2
 
 
@@ -128,11 +137,5 @@ flutter:
   assets:
     - assets/images/
     - assets/audio/
+    - assets/audio/whitecul/
   
-  # フォント設定（WhiteCULテーマ用）
-  fonts:
-    - family: NotoSansJP
-      fonts:
-        - asset: assets/fonts/NotoSansJP-Regular.ttf
-        - asset: assets/fonts/NotoSansJP-Bold.ttf
-          weight: 700

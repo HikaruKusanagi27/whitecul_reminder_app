@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'whitecul_voice.freezed.dart';
-// part 'whitecul_voice.g.dart'; // TODO: enum serialization修正後に有効化
+part 'whitecul_voice.g.dart';
 
 @freezed
 class VoiceSettings with _$VoiceSettings {
@@ -12,6 +12,9 @@ class VoiceSettings with _$VoiceSettings {
     @Default(50) int speakerId, // WhiteCULのspeaker_id
     @Default(true) bool isEnabled,
   }) = _VoiceSettings;
+
+  factory VoiceSettings.fromJson(Map<String, dynamic> json) =>
+      _$VoiceSettingsFromJson(json);
 }
 
 @freezed
@@ -22,12 +25,9 @@ class VoiceMessage with _$VoiceMessage {
     @Default('') String audioFilePath,
     DateTime? generatedAt,
   }) = _VoiceMessage;
+
+  factory VoiceMessage.fromJson(Map<String, dynamic> json) =>
+      _$VoiceMessageFromJson(json);
 }
 
-@freezed
-class VoiceMessageType with _$VoiceMessageType {
-  const factory VoiceMessageType.reminder() = _ReminderMessage;
-  const factory VoiceMessageType.greeting() = _GreetingMessage;
-  const factory VoiceMessageType.completion() = _CompletionMessage;
-  const factory VoiceMessageType.custom(String customType) = _CustomMessage;
-}
+enum VoiceMessageType { reminder, greeting, completion, custom }

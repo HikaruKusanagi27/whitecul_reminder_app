@@ -6,38 +6,27 @@ part 'reminder.g.dart';
 @freezed
 class Reminder with _$Reminder {
   const factory Reminder({
-    required int id,
+    required String id,
     required String title,
-    required String description,
+    required String message,
     required DateTime dateTime,
-    required bool isCompleted,
-    required bool isNotificationEnabled,
-    required ReminderPriority priority,
-    required ReminderCategory category,
-    @Default([]) List<String> voiceMessages,
-    DateTime? completedAt,
+    @Default(true) bool isActive,
+    @Default('normal') String voiceType, // 'normal', 'happy', 'sad', 'crying'
     DateTime? createdAt,
-    DateTime? updatedAt,
   }) = _Reminder;
 
   factory Reminder.fromJson(Map<String, dynamic> json) =>
       _$ReminderFromJson(json);
 }
 
-@freezed
-class ReminderPriority with _$ReminderPriority {
-  const factory ReminderPriority.low() = _Low;
-  const factory ReminderPriority.medium() = _Medium;
-  const factory ReminderPriority.high() = _High;
-  const factory ReminderPriority.urgent() = _Urgent;
-}
+// WhiteCUL音声タイプ
+enum WhiteCulVoiceType {
+  normal('normal', 'ノーマル'),
+  happy('happy', '喜び'),
+  sad('sad', '悲しみ'),
+  crying('crying', '泣き');
 
-@freezed
-class ReminderCategory with _$ReminderCategory {
-  const factory ReminderCategory.work() = _Work;
-  const factory ReminderCategory.personal() = _Personal;
-  const factory ReminderCategory.health() = _Health;
-  const factory ReminderCategory.study() = _Study;
-  const factory ReminderCategory.shopping() = _Shopping;
-  const factory ReminderCategory.other(String customName) = _Other;
+  const WhiteCulVoiceType(this.value, this.displayName);
+  final String value;
+  final String displayName;
 }

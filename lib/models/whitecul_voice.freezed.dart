@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+VoiceSettings _$VoiceSettingsFromJson(Map<String, dynamic> json) {
+  return _VoiceSettings.fromJson(json);
+}
+
 /// @nodoc
 mixin _$VoiceSettings {
   double get speed => throw _privateConstructorUsedError;
@@ -22,6 +26,9 @@ mixin _$VoiceSettings {
   int get speakerId =>
       throw _privateConstructorUsedError; // WhiteCULのspeaker_id
   bool get isEnabled => throw _privateConstructorUsedError;
+
+  /// Serializes this VoiceSettings to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of VoiceSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -151,7 +158,7 @@ class __$$VoiceSettingsImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$VoiceSettingsImpl implements _VoiceSettings {
   const _$VoiceSettingsImpl(
       {this.speed = 1.0,
@@ -159,6 +166,9 @@ class _$VoiceSettingsImpl implements _VoiceSettings {
       this.volume = 1.0,
       this.speakerId = 50,
       this.isEnabled = true});
+
+  factory _$VoiceSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$VoiceSettingsImplFromJson(json);
 
   @override
   @JsonKey()
@@ -196,6 +206,7 @@ class _$VoiceSettingsImpl implements _VoiceSettings {
                 other.isEnabled == isEnabled));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, speed, pitch, volume, speakerId, isEnabled);
@@ -207,6 +218,13 @@ class _$VoiceSettingsImpl implements _VoiceSettings {
   @pragma('vm:prefer-inline')
   _$$VoiceSettingsImplCopyWith<_$VoiceSettingsImpl> get copyWith =>
       __$$VoiceSettingsImplCopyWithImpl<_$VoiceSettingsImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$VoiceSettingsImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _VoiceSettings implements VoiceSettings {
@@ -216,6 +234,9 @@ abstract class _VoiceSettings implements VoiceSettings {
       final double volume,
       final int speakerId,
       final bool isEnabled}) = _$VoiceSettingsImpl;
+
+  factory _VoiceSettings.fromJson(Map<String, dynamic> json) =
+      _$VoiceSettingsImpl.fromJson;
 
   @override
   double get speed;
@@ -236,12 +257,19 @@ abstract class _VoiceSettings implements VoiceSettings {
       throw _privateConstructorUsedError;
 }
 
+VoiceMessage _$VoiceMessageFromJson(Map<String, dynamic> json) {
+  return _VoiceMessage.fromJson(json);
+}
+
 /// @nodoc
 mixin _$VoiceMessage {
   String get text => throw _privateConstructorUsedError;
   VoiceMessageType get type => throw _privateConstructorUsedError;
   String get audioFilePath => throw _privateConstructorUsedError;
   DateTime? get generatedAt => throw _privateConstructorUsedError;
+
+  /// Serializes this VoiceMessage to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of VoiceMessage
   /// with the given fields replaced by the non-null parameter values.
@@ -261,8 +289,6 @@ abstract class $VoiceMessageCopyWith<$Res> {
       VoiceMessageType type,
       String audioFilePath,
       DateTime? generatedAt});
-
-  $VoiceMessageTypeCopyWith<$Res> get type;
 }
 
 /// @nodoc
@@ -304,16 +330,6 @@ class _$VoiceMessageCopyWithImpl<$Res, $Val extends VoiceMessage>
               as DateTime?,
     ) as $Val);
   }
-
-  /// Create a copy of VoiceMessage
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $VoiceMessageTypeCopyWith<$Res> get type {
-    return $VoiceMessageTypeCopyWith<$Res>(_value.type, (value) {
-      return _then(_value.copyWith(type: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -329,9 +345,6 @@ abstract class _$$VoiceMessageImplCopyWith<$Res>
       VoiceMessageType type,
       String audioFilePath,
       DateTime? generatedAt});
-
-  @override
-  $VoiceMessageTypeCopyWith<$Res> get type;
 }
 
 /// @nodoc
@@ -374,13 +387,16 @@ class __$$VoiceMessageImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$VoiceMessageImpl implements _VoiceMessage {
   const _$VoiceMessageImpl(
       {required this.text,
       required this.type,
       this.audioFilePath = '',
       this.generatedAt});
+
+  factory _$VoiceMessageImpl.fromJson(Map<String, dynamic> json) =>
+      _$$VoiceMessageImplFromJson(json);
 
   @override
   final String text;
@@ -410,6 +426,7 @@ class _$VoiceMessageImpl implements _VoiceMessage {
                 other.generatedAt == generatedAt));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, text, type, audioFilePath, generatedAt);
@@ -421,6 +438,13 @@ class _$VoiceMessageImpl implements _VoiceMessage {
   @pragma('vm:prefer-inline')
   _$$VoiceMessageImplCopyWith<_$VoiceMessageImpl> get copyWith =>
       __$$VoiceMessageImplCopyWithImpl<_$VoiceMessageImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$VoiceMessageImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _VoiceMessage implements VoiceMessage {
@@ -429,6 +453,9 @@ abstract class _VoiceMessage implements VoiceMessage {
       required final VoiceMessageType type,
       final String audioFilePath,
       final DateTime? generatedAt}) = _$VoiceMessageImpl;
+
+  factory _VoiceMessage.fromJson(Map<String, dynamic> json) =
+      _$VoiceMessageImpl.fromJson;
 
   @override
   String get text;
@@ -444,584 +471,5 @@ abstract class _VoiceMessage implements VoiceMessage {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$VoiceMessageImplCopyWith<_$VoiceMessageImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$VoiceMessageType {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() reminder,
-    required TResult Function() greeting,
-    required TResult Function() completion,
-    required TResult Function(String customType) custom,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? reminder,
-    TResult? Function()? greeting,
-    TResult? Function()? completion,
-    TResult? Function(String customType)? custom,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? reminder,
-    TResult Function()? greeting,
-    TResult Function()? completion,
-    TResult Function(String customType)? custom,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_ReminderMessage value) reminder,
-    required TResult Function(_GreetingMessage value) greeting,
-    required TResult Function(_CompletionMessage value) completion,
-    required TResult Function(_CustomMessage value) custom,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_ReminderMessage value)? reminder,
-    TResult? Function(_GreetingMessage value)? greeting,
-    TResult? Function(_CompletionMessage value)? completion,
-    TResult? Function(_CustomMessage value)? custom,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ReminderMessage value)? reminder,
-    TResult Function(_GreetingMessage value)? greeting,
-    TResult Function(_CompletionMessage value)? completion,
-    TResult Function(_CustomMessage value)? custom,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $VoiceMessageTypeCopyWith<$Res> {
-  factory $VoiceMessageTypeCopyWith(
-          VoiceMessageType value, $Res Function(VoiceMessageType) then) =
-      _$VoiceMessageTypeCopyWithImpl<$Res, VoiceMessageType>;
-}
-
-/// @nodoc
-class _$VoiceMessageTypeCopyWithImpl<$Res, $Val extends VoiceMessageType>
-    implements $VoiceMessageTypeCopyWith<$Res> {
-  _$VoiceMessageTypeCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of VoiceMessageType
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$ReminderMessageImplCopyWith<$Res> {
-  factory _$$ReminderMessageImplCopyWith(_$ReminderMessageImpl value,
-          $Res Function(_$ReminderMessageImpl) then) =
-      __$$ReminderMessageImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$ReminderMessageImplCopyWithImpl<$Res>
-    extends _$VoiceMessageTypeCopyWithImpl<$Res, _$ReminderMessageImpl>
-    implements _$$ReminderMessageImplCopyWith<$Res> {
-  __$$ReminderMessageImplCopyWithImpl(
-      _$ReminderMessageImpl _value, $Res Function(_$ReminderMessageImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of VoiceMessageType
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$ReminderMessageImpl implements _ReminderMessage {
-  const _$ReminderMessageImpl();
-
-  @override
-  String toString() {
-    return 'VoiceMessageType.reminder()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ReminderMessageImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() reminder,
-    required TResult Function() greeting,
-    required TResult Function() completion,
-    required TResult Function(String customType) custom,
-  }) {
-    return reminder();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? reminder,
-    TResult? Function()? greeting,
-    TResult? Function()? completion,
-    TResult? Function(String customType)? custom,
-  }) {
-    return reminder?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? reminder,
-    TResult Function()? greeting,
-    TResult Function()? completion,
-    TResult Function(String customType)? custom,
-    required TResult orElse(),
-  }) {
-    if (reminder != null) {
-      return reminder();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_ReminderMessage value) reminder,
-    required TResult Function(_GreetingMessage value) greeting,
-    required TResult Function(_CompletionMessage value) completion,
-    required TResult Function(_CustomMessage value) custom,
-  }) {
-    return reminder(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_ReminderMessage value)? reminder,
-    TResult? Function(_GreetingMessage value)? greeting,
-    TResult? Function(_CompletionMessage value)? completion,
-    TResult? Function(_CustomMessage value)? custom,
-  }) {
-    return reminder?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ReminderMessage value)? reminder,
-    TResult Function(_GreetingMessage value)? greeting,
-    TResult Function(_CompletionMessage value)? completion,
-    TResult Function(_CustomMessage value)? custom,
-    required TResult orElse(),
-  }) {
-    if (reminder != null) {
-      return reminder(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ReminderMessage implements VoiceMessageType {
-  const factory _ReminderMessage() = _$ReminderMessageImpl;
-}
-
-/// @nodoc
-abstract class _$$GreetingMessageImplCopyWith<$Res> {
-  factory _$$GreetingMessageImplCopyWith(_$GreetingMessageImpl value,
-          $Res Function(_$GreetingMessageImpl) then) =
-      __$$GreetingMessageImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$GreetingMessageImplCopyWithImpl<$Res>
-    extends _$VoiceMessageTypeCopyWithImpl<$Res, _$GreetingMessageImpl>
-    implements _$$GreetingMessageImplCopyWith<$Res> {
-  __$$GreetingMessageImplCopyWithImpl(
-      _$GreetingMessageImpl _value, $Res Function(_$GreetingMessageImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of VoiceMessageType
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$GreetingMessageImpl implements _GreetingMessage {
-  const _$GreetingMessageImpl();
-
-  @override
-  String toString() {
-    return 'VoiceMessageType.greeting()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GreetingMessageImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() reminder,
-    required TResult Function() greeting,
-    required TResult Function() completion,
-    required TResult Function(String customType) custom,
-  }) {
-    return greeting();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? reminder,
-    TResult? Function()? greeting,
-    TResult? Function()? completion,
-    TResult? Function(String customType)? custom,
-  }) {
-    return greeting?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? reminder,
-    TResult Function()? greeting,
-    TResult Function()? completion,
-    TResult Function(String customType)? custom,
-    required TResult orElse(),
-  }) {
-    if (greeting != null) {
-      return greeting();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_ReminderMessage value) reminder,
-    required TResult Function(_GreetingMessage value) greeting,
-    required TResult Function(_CompletionMessage value) completion,
-    required TResult Function(_CustomMessage value) custom,
-  }) {
-    return greeting(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_ReminderMessage value)? reminder,
-    TResult? Function(_GreetingMessage value)? greeting,
-    TResult? Function(_CompletionMessage value)? completion,
-    TResult? Function(_CustomMessage value)? custom,
-  }) {
-    return greeting?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ReminderMessage value)? reminder,
-    TResult Function(_GreetingMessage value)? greeting,
-    TResult Function(_CompletionMessage value)? completion,
-    TResult Function(_CustomMessage value)? custom,
-    required TResult orElse(),
-  }) {
-    if (greeting != null) {
-      return greeting(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _GreetingMessage implements VoiceMessageType {
-  const factory _GreetingMessage() = _$GreetingMessageImpl;
-}
-
-/// @nodoc
-abstract class _$$CompletionMessageImplCopyWith<$Res> {
-  factory _$$CompletionMessageImplCopyWith(_$CompletionMessageImpl value,
-          $Res Function(_$CompletionMessageImpl) then) =
-      __$$CompletionMessageImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$CompletionMessageImplCopyWithImpl<$Res>
-    extends _$VoiceMessageTypeCopyWithImpl<$Res, _$CompletionMessageImpl>
-    implements _$$CompletionMessageImplCopyWith<$Res> {
-  __$$CompletionMessageImplCopyWithImpl(_$CompletionMessageImpl _value,
-      $Res Function(_$CompletionMessageImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of VoiceMessageType
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$CompletionMessageImpl implements _CompletionMessage {
-  const _$CompletionMessageImpl();
-
-  @override
-  String toString() {
-    return 'VoiceMessageType.completion()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CompletionMessageImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() reminder,
-    required TResult Function() greeting,
-    required TResult Function() completion,
-    required TResult Function(String customType) custom,
-  }) {
-    return completion();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? reminder,
-    TResult? Function()? greeting,
-    TResult? Function()? completion,
-    TResult? Function(String customType)? custom,
-  }) {
-    return completion?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? reminder,
-    TResult Function()? greeting,
-    TResult Function()? completion,
-    TResult Function(String customType)? custom,
-    required TResult orElse(),
-  }) {
-    if (completion != null) {
-      return completion();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_ReminderMessage value) reminder,
-    required TResult Function(_GreetingMessage value) greeting,
-    required TResult Function(_CompletionMessage value) completion,
-    required TResult Function(_CustomMessage value) custom,
-  }) {
-    return completion(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_ReminderMessage value)? reminder,
-    TResult? Function(_GreetingMessage value)? greeting,
-    TResult? Function(_CompletionMessage value)? completion,
-    TResult? Function(_CustomMessage value)? custom,
-  }) {
-    return completion?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ReminderMessage value)? reminder,
-    TResult Function(_GreetingMessage value)? greeting,
-    TResult Function(_CompletionMessage value)? completion,
-    TResult Function(_CustomMessage value)? custom,
-    required TResult orElse(),
-  }) {
-    if (completion != null) {
-      return completion(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _CompletionMessage implements VoiceMessageType {
-  const factory _CompletionMessage() = _$CompletionMessageImpl;
-}
-
-/// @nodoc
-abstract class _$$CustomMessageImplCopyWith<$Res> {
-  factory _$$CustomMessageImplCopyWith(
-          _$CustomMessageImpl value, $Res Function(_$CustomMessageImpl) then) =
-      __$$CustomMessageImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String customType});
-}
-
-/// @nodoc
-class __$$CustomMessageImplCopyWithImpl<$Res>
-    extends _$VoiceMessageTypeCopyWithImpl<$Res, _$CustomMessageImpl>
-    implements _$$CustomMessageImplCopyWith<$Res> {
-  __$$CustomMessageImplCopyWithImpl(
-      _$CustomMessageImpl _value, $Res Function(_$CustomMessageImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of VoiceMessageType
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? customType = null,
-  }) {
-    return _then(_$CustomMessageImpl(
-      null == customType
-          ? _value.customType
-          : customType // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$CustomMessageImpl implements _CustomMessage {
-  const _$CustomMessageImpl(this.customType);
-
-  @override
-  final String customType;
-
-  @override
-  String toString() {
-    return 'VoiceMessageType.custom(customType: $customType)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CustomMessageImpl &&
-            (identical(other.customType, customType) ||
-                other.customType == customType));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, customType);
-
-  /// Create a copy of VoiceMessageType
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CustomMessageImplCopyWith<_$CustomMessageImpl> get copyWith =>
-      __$$CustomMessageImplCopyWithImpl<_$CustomMessageImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() reminder,
-    required TResult Function() greeting,
-    required TResult Function() completion,
-    required TResult Function(String customType) custom,
-  }) {
-    return custom(customType);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? reminder,
-    TResult? Function()? greeting,
-    TResult? Function()? completion,
-    TResult? Function(String customType)? custom,
-  }) {
-    return custom?.call(customType);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? reminder,
-    TResult Function()? greeting,
-    TResult Function()? completion,
-    TResult Function(String customType)? custom,
-    required TResult orElse(),
-  }) {
-    if (custom != null) {
-      return custom(customType);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_ReminderMessage value) reminder,
-    required TResult Function(_GreetingMessage value) greeting,
-    required TResult Function(_CompletionMessage value) completion,
-    required TResult Function(_CustomMessage value) custom,
-  }) {
-    return custom(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_ReminderMessage value)? reminder,
-    TResult? Function(_GreetingMessage value)? greeting,
-    TResult? Function(_CompletionMessage value)? completion,
-    TResult? Function(_CustomMessage value)? custom,
-  }) {
-    return custom?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ReminderMessage value)? reminder,
-    TResult Function(_GreetingMessage value)? greeting,
-    TResult Function(_CompletionMessage value)? completion,
-    TResult Function(_CustomMessage value)? custom,
-    required TResult orElse(),
-  }) {
-    if (custom != null) {
-      return custom(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _CustomMessage implements VoiceMessageType {
-  const factory _CustomMessage(final String customType) = _$CustomMessageImpl;
-
-  String get customType;
-
-  /// Create a copy of VoiceMessageType
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CustomMessageImplCopyWith<_$CustomMessageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
