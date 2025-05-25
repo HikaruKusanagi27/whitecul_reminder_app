@@ -28,7 +28,6 @@ class CalendarScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('📅 WhiteCULカレンダー'),
         backgroundColor: const Color(0xFF7B68EE),
         foregroundColor: Colors.white,
       ),

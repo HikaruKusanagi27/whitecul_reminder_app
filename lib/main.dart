@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:speech_balloon/speech_balloon.dart';
 import 'models/reminder.dart';
 import 'providers/voice_provider.dart';
 import 'providers/reminder_provider.dart';
@@ -104,7 +105,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final voiceState = ref.watch(voicePlaybackStateProvider);
     final todayReminders = ref.watch(todayRemindersProvider);
 
     return Scaffold(
@@ -125,20 +125,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // WhiteCULの画像を表示
-
-              // 今日のリマインダー数表示
-              Container(
-                padding: const EdgeInsets.all(12),
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.black),
-                ),
+              SpeechBalloon(
+                borderColor: Colors.black,
+                height: 60, // マルなので同じheightとwidth
+                width: 300,
+                borderRadius: 20,
+                offset: Offset(40, -1), // 棘の位置がずれてしまったのでoffsetで位置を修正してあげる
                 child: Row(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(width: 8),
                     Text(
                       todayReminders.isNotEmpty
                           ? '今日のリマインダーは ${todayReminders.length}件だよ〜'
@@ -153,27 +148,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
               ),
 
-              const SizedBox(height: 20),
-
-              // 音声再生状態表示
-              if (voiceState == VoicePlaybackState.playing)
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    ),
-                    SizedBox(width: 10),
-                    Text('WhiteCULが話しています...'),
-                  ],
-                ),
-
-              // WhiteCULの画像表示
+              // 画像を下に移動するためのスペーサー
               Image.asset(
                 'assets/images/通常.png',
-
                 errorBuilder: (context, error, stackTrace) {
                   // 画像読み込みエラー時のプレースホルダー
                   return Container(
@@ -190,6 +167,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   );
                 },
               ),
+
+              // 画面下部に少し余白を追加
+              const SizedBox(height: 40),
             ],
           ),
         ),

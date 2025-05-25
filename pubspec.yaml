@@ -74,6 +74,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   path: ^1.9.1
+  speech_balloon: ^0.0.4
   
 
 dev_dependencies:
