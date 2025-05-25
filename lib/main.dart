@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'models/reminder.dart';
 import 'providers/voice_provider.dart';
-import 'providers/simple_voice_provider.dart';
 import 'providers/reminder_provider.dart';
 import 'screens/calendar_screen.dart';
 
@@ -106,198 +105,93 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final voiceState = ref.watch(voicePlaybackStateProvider);
-    final voicevoxAvailability = ref.watch(voicevoxAvailabilityProvider);
     final todayReminders = ref.watch(todayRemindersProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('WhiteCUL Reminder'),
-        actions: [
-          // VOICEVOX Engine接続状態インジケーター
-          voicevoxAvailability.when(
-            data:
-                (isAvailable) => Icon(
-                  isAvailable ? Icons.mic : Icons.mic_off,
-                  color: isAvailable ? Colors.green : Colors.red,
-                ),
-            loading:
-                () => const SizedBox(
-                  width: 16,
-                  height: 16,
-                  child: CircularProgressIndicator(strokeWidth: 2),
-                ),
-            error: (_, __) => const Icon(Icons.error, color: Colors.red),
-          ),
-          const SizedBox(width: 8),
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              _showNotificationSettingsDialog();
-            },
-          ),
-        ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'WhiteCULリマインダーアプリ',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
+      // appBar: AppBar(
+      //   actions: [
+      //     IconButton(
+      //       icon: const Icon(Icons.settings),
+      //       onPressed: () {
+      //         _showNotificationSettingsDialog();
+      //       },
+      //     ),
+      //   ],
+      // ),
+      body: Container(
+        color: Colors.cyanAccent,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // WhiteCULの画像を表示
 
-            // 今日のリマインダー数表示
-            if (todayReminders.isNotEmpty)
+              // 今日のリマインダー数表示
               Container(
                 padding: const EdgeInsets.all(12),
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF7B68EE).withOpacity(0.1),
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: const Color(0xFF7B68EE).withOpacity(0.3),
-                  ),
+                  border: Border.all(color: Colors.black),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.today, color: Color(0xFF7B68EE)),
                     const SizedBox(width: 8),
                     Text(
-                      '今日のリマインダー: ${todayReminders.length}件',
+                      todayReminders.isNotEmpty
+                          ? '今日のリマインダーは ${todayReminders.length}件だよ〜'
+                          : '今日も素敵だね！',
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF7B68EE),
+                        color: Colors.black,
                       ),
                     ),
                   ],
                 ),
               ),
 
-            const SizedBox(height: 20),
+              const SizedBox(height: 20),
 
-            // 音声再生状態表示
-            if (voiceState == VoicePlaybackState.playing)
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  ),
-                  SizedBox(width: 10),
-                  Text('WhiteCULが話しています...'),
-                ],
-              ),
-
-            const SizedBox(height: 30),
-
-            // 🎵 シンプルなWhiteCUL音声テスト
-            const Text(
-              '🎵 録音済みWhiteCUL音声',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-
-            ElevatedButton.icon(
-              onPressed: () async {
-                final playSimpleVoice = ref.read(simpleWhiteCulPlayProvider);
-                final success = await playSimpleVoice();
-
-                if (!context.mounted) return;
-
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      success ? 'WhiteCUL音声再生成功！' : 'WhiteCUL音声再生失敗',
+              // 音声再生状態表示
+              if (voiceState == VoicePlaybackState.playing)
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2),
                     ),
-                    backgroundColor: success ? Colors.green : Colors.red,
-                  ),
-                );
-              },
-              icon: const Icon(Icons.play_circle),
-              label: const Text('001_WhiteCUL(ノーマル) 再生'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.purple.shade100,
-                foregroundColor: Colors.purple.shade800,
-              ),
-            ),
-
-            const SizedBox(height: 30),
-
-            // 📅 カレンダー機能
-            const Text(
-              '📅 カレンダー機能',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const CalendarScreen(),
-                  ),
-                );
-              },
-              icon: const Icon(Icons.calendar_today),
-              label: const Text('カレンダーを開く'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF7B68EE),
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 12,
+                    SizedBox(width: 10),
+                    Text('WhiteCULが話しています...'),
+                  ],
                 ),
+
+              // WhiteCULの画像表示
+              Image.asset(
+                'assets/images/通常.png',
+
+                errorBuilder: (context, error, stackTrace) {
+                  // 画像読み込みエラー時のプレースホルダー
+                  return Container(
+                    width: 150,
+                    height: 150,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [Colors.lightBlue, Color(0xFFB0C4DE)],
+                      ),
+                    ),
+                  );
+                },
               ),
-            ),
-
-            const SizedBox(height: 20),
-
-            // 🔔 通知テスト機能
-            const Text(
-              '🔔 通知テスト',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-
-            ElevatedButton.icon(
-              onPressed: () async {
-                await _testNotification();
-              },
-              icon: const Icon(Icons.notifications_active),
-              label: const Text('テスト通知を送信'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange.shade600,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 12,
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 10),
-
-            ElevatedButton.icon(
-              onPressed: () async {
-                await _testImmediateNotification();
-              },
-              icon: const Icon(Icons.volume_up),
-              label: const Text('即座通知+音声テスト'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red.shade600,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 12,
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
