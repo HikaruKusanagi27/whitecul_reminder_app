@@ -28,8 +28,8 @@ class CalendarScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF7B68EE),
-        foregroundColor: Colors.white,
+        backgroundColor: Colors.cyanAccent,
+        foregroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -187,7 +187,6 @@ class CalendarScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: 16),
                     SizedBox(
-                      height: 320, // リスト部分の高さを固定
                       child:
                           selectedDayReminders.isEmpty
                               ? Center(
@@ -337,8 +336,9 @@ class CalendarScreen extends ConsumerWidget {
             ),
           );
         },
-        backgroundColor: const Color(0xFF7B68EE),
-        child: const Icon(Icons.add, color: Colors.white),
+        backgroundColor: Colors.cyanAccent.shade100,
+
+        child: const Icon(Icons.create, color: Colors.black),
       ),
     );
   }

@@ -1,14 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:speech_balloon/speech_balloon.dart';
 import 'models/reminder.dart';
-import 'providers/voice_provider.dart';
 import 'providers/reminder_provider.dart';
 import 'screens/calendar_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Firebase初期化処理
+  await Firebase.initializeApp();
   runApp(const ProviderScope(child: WhiteCULReminderApp()));
 }
 
@@ -37,7 +41,7 @@ class WhiteCULReminderApp extends StatelessWidget {
         ),
         textTheme: GoogleFonts.notoSansJpTextTheme(),
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF7B68EE),
+          backgroundColor: Colors.lightBlue,
           foregroundColor: Colors.white,
           elevation: 2,
         ),
@@ -48,7 +52,7 @@ class WhiteCULReminderApp extends StatelessWidget {
           ),
         ),
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
-          backgroundColor: Color(0xFF7B68EE),
+          backgroundColor: Colors.lightBlue,
           foregroundColor: Colors.white,
         ),
       ),
@@ -108,16 +112,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final todayReminders = ref.watch(todayRemindersProvider);
 
     return Scaffold(
-      // appBar: AppBar(
-      //   actions: [
-      //     IconButton(
-      //       icon: const Icon(Icons.settings),
-      //       onPressed: () {
-      //         _showNotificationSettingsDialog();
-      //       },
-      //     ),
-      //   ],
-      // ),
       body: Container(
         color: Colors.cyanAccent,
         child: Center(
@@ -175,12 +169,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.cyanAccent.shade100,
+        foregroundColor: Colors.black,
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => const CalendarScreen()),
           );
         },
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.calendar_today),
       ),
     );
   }

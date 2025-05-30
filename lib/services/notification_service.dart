@@ -1,5 +1,4 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter/services.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 import '../models/reminder.dart';
@@ -188,7 +187,8 @@ class NotificationService {
           notificationDetails,
           uiLocalNotificationDateInterpretation:
               UILocalNotificationDateInterpretation.absoluteTime,
-          payload: reminder.id, // リマインダーIDを渡す
+          payload: reminder.id,
+          androidScheduleMode: AndroidScheduleMode.exact,
         );
 
         print('✅ リマインダー通知をスケジュール: ${reminder.title} - ${reminder.dateTime}');
