@@ -9,10 +9,17 @@ import 'models/reminder.dart';
 import 'providers/reminder_provider.dart';
 import 'screens/calendar_screen.dart';
 
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+}
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Firebase初期化処理
   await Firebase.initializeApp();
+  // バックグラウンド通知の設定
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(const ProviderScope(child: WhiteCULReminderApp()));
 }
 
